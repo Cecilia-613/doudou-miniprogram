@@ -1,0 +1,27 @@
+<view class="mic-wrap">
+  <!-- 三层扩散波纹 -->
+  <view wx:if="{{pressed}}" class="ripple r1"></view>
+  <view wx:if="{{pressed}}" class="ripple r2"></view>
+  <view wx:if="{{pressed}}" class="ripple r3"></view>
+
+  <view
+    class="mic {{pressed ? 'pressed' : ''}}"
+    bindtouchstart="onTouchStart"
+    bindtouchend="onTouchEnd"
+    bindtouchcancel="onTouchCancel"
+    hover-class="none"
+    role="button"
+    aria-label="{{label}}">
+    <view class="mic-icon">{{pressed ? '🎙️' : '🎤'}}</view>
+    <view class="mic-label">{{label}}</view>
+    <view wx:if="{{pressed}}" class="mic-tip">{{pressedTip}}</view>
+  </view>
+
+  <!-- 实时音量条 -->
+  <view wx:if="{{pressed}}" class="vol">
+    <view wx:for="{{12}}" wx:key="*this"
+          class="vol-bar {{index < volume/8 ? 'on' : ''}}"></view>
+  </view>
+
+  <view wx:if="{{pressed && seconds > 0}}" class="mic-sec">{{seconds}} 秒</view>
+</view>

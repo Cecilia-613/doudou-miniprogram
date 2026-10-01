@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "这一周的成绩",
+  "usingComponents": {
+    "radar": "/components/radar/index"
+  }
+}

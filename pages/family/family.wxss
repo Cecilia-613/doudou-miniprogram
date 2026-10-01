@@ -1,0 +1,88 @@
+/* 子女端：常规排版密度（非适老化），字号仍不小于 18px 以保证可读性 */
+.fam { padding-bottom: 60rpx; }
+
+.push-card {
+  background: var(--card);
+  border-radius: 20rpx;
+  border: 2rpx solid var(--line);
+  border-left: 10rpx solid var(--danger);
+  padding: 28rpx;
+}
+.push-head { display: flex; align-items: center; gap: 12rpx; }
+.push-title { font-size: 34rpx; font-weight: 700; line-height: 1.4; }
+.push-body { display: block; margin-top: 12rpx; font-size: 30rpx; color: var(--ink-2); line-height: 1.6; }
+.push-actions { margin-top: 20rpx; gap: 16rpx; }
+.push-btn {
+  min-height: 88rpx;
+  padding: 8rpx 28rpx;
+  line-height: 1.25;
+  text-align: center;
+  border-radius: 999rpx;
+  border: 2rpx solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28rpx;
+}
+.push-btn-main { background: var(--brand); color: #fff; border-color: var(--brand); }
+
+.h3 { font-size: 34rpx; font-weight: 700; display: block; }
+.total { margin-top: 16rpx; gap: 12rpx; }
+.total { align-items: baseline; }
+.big-num { font-size: 88rpx; font-weight: 700; color: var(--brand); line-height: 1; }
+
+.dist-row {
+  margin-top: 28rpx;
+  display: flex;
+  align-items: flex-start;      /* 三列从顶部起算，柱子区域等高，文字/数字在同一水平线 */
+  gap: 40rpx;
+}
+.dist-item { flex: 1; display: flex; flex-direction: column; align-items: center; }
+.dist-bar-bg {
+  width: 100%;
+  height: 140rpx;
+  background: #F1EADC;
+  border-radius: 16rpx;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+}
+.dist-bar { width: 100%; border-radius: 16rpx; }
+.dist-text { font-size: 28rpx; line-height: 1.4; margin-top: 12rpx; color: var(--ink-2); }
+.dist-num { font-size: 34rpx; line-height: 1.4; font-weight: 700; }
+
+.ev {
+  display: flex;
+  gap: 16rpx;
+  padding: 20rpx 0;
+  border-bottom: 2rpx solid var(--line);
+}
+.ev:last-child { border-bottom: none; }
+.ev-dot { width: 16rpx; height: 16rpx; border-radius: 999rpx; margin-top: calc((32rpx * 1.5 - 16rpx) / 2); flex-shrink: 0; }
+.ev-main { flex: 1; }
+.ev-text { font-size: 32rpx; font-weight: 500; line-height: 1.5; }
+.ev-meta { font-size: 26rpx; color: var(--ink-2); margin-top: 4rpx; line-height: 1.5; }
+
+.radar-wrap { display: flex; justify-content: center; margin: 16rpx 0; }
+
+.tip {
+  display: flex;
+  gap: 16rpx;
+  margin-top: 20rpx;
+  align-items: flex-start;
+}
+.tip-no {
+  width: 48rpx; height: 48rpx;              /* = 第一行行高 30rpx*1.6 ≈ 48rpx，圆圈对着第一行 */
+  background: var(--warn-bg);
+  color: var(--brand-2);
+  font-size: 26rpx;
+  margin-top: 0;
+}
+.tip-text { flex: 1; min-width: 0; font-size: 30rpx; line-height: 1.6; }
+
+.foot {
+  margin-top: 32rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: var(--ink-2);
+}

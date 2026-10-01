@@ -1,0 +1,8 @@
+.radar-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.radar-canvas {
+  display: block;
+}

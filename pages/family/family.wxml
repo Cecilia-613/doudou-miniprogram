@@ -1,0 +1,67 @@
+<view class="page fam" style="{{vars}}">
+
+  <!-- 这就是微信里推送给子女的那张卡片 -->
+  <view class="push-card">
+    <view class="push-head">
+      <text class="ico ico-s">⚠️</text>
+      <text class="push-title grow">妈妈今天问了「医保卡冻结」</text>
+    </view>
+    <text class="push-body para">兜兜判定这是骗子，已经替她回了。你有空的时候提一句。</text>
+    <view class="row push-actions">
+      <view class="push-btn push-btn-main grow">给妈妈打电话</view>
+      <view class="push-btn grow">查看详情</view>
+    </view>
+  </view>
+
+  <!-- 本周概览 -->
+  <view class="card">
+    <text class="cap">{{w.weekLabel}}</text>
+    <view class="row total">
+      <text class="big-num">{{w.total}}</text>
+      <text class="cap-ink">次提问，其中 {{w.dist.danger}} 次是骗子、{{w.dist.warn}} 次存疑</text>
+    </view>
+
+    <view class="dist-row">
+      <view wx:for="{{dist}}" wx:key="key" class="dist-item">
+        <view class="dist-bar-bg">
+          <view class="dist-bar" style="height:{{item.pct + 12}}%;background:{{item.color}}"></view>
+        </view>
+        <text class="dist-text">{{item.text}}</text>
+        <text class="dist-num">{{item.n}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 事件 -->
+  <view class="card" style="margin-top:24rpx">
+    <text class="h3">这一周都问了些啥</text>
+    <view wx:for="{{events}}" wx:key="text" class="ev">
+      <view class="ev-dot" style="background:{{item.color}}"></view>
+      <view class="col ev-main">
+        <text class="ev-text">{{item.text}}</text>
+        <text class="ev-meta">{{item.time}}・{{item.tag}}・{{item.handled}}</text>
+      </view>
+    </view>
+  </view>
+
+  <!-- 雷达 -->
+  <view class="card" style="margin-top:24rpx">
+    <text class="h3">能力和上周比一比</text>
+    <view class="radar-wrap">
+      <radar values="{{w.radar}}" labels="{{labels}}" size="{{size}}" line-color="#1E8E3E"></radar>
+    </view>
+    <text class="cap para">绿色是本周，「链接鉴别」这一项比上周高了 12 分。</text>
+  </view>
+
+  <!-- 话术包 -->
+  <view class="card" style="margin-top:24rpx">
+    <text class="h3">{{txt.talkTips}}</text>
+    <view wx:for="{{w.talkTips}}" wx:key="*this" class="tip">
+      <text class="tip-no dot">{{index + 1}}</text>
+      <text class="tip-text para">{{item}}</text>
+    </view>
+  </view>
+
+  <view class="foot">数据只做了脱敏处理，不显示聊天内容与银行卡信息</view>
+
+</view>

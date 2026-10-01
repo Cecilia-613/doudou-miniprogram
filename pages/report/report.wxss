@@ -1,0 +1,37 @@
+.report-page { padding-bottom: 80rpx; }
+
+.score-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 48rpx 0 32rpx;
+}
+.score {
+  font-size: 180rpx;
+  font-weight: 700;
+  line-height: 1.1;
+  color: var(--brand);
+}
+.summary {
+  display: block;
+  text-align: center;
+  padding: 0 16rpx;
+}
+.radar-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 24rpx 0 8rpx;
+}
+.weak {
+  background: var(--warn-bg);
+  border-radius: 20rpx;
+  padding: 20rpx 24rpx;
+  margin-top: 16rpx;
+}
+.btn-row {
+  display: flex;
+  align-items: stretch;      /* 两个按钮永远等高：分享按钮字多换行时，右边「再做一遍」一起变高 */
+  gap: 24rpx;
+  margin-top: 40rpx;
+}
+.btn-row .btn { padding: 16rpx 20rpx; min-height: 144rpx; }

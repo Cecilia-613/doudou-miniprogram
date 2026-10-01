@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "子女周报",
+  "usingComponents": {
+    "radar": "/components/radar/index"
+  }
+}

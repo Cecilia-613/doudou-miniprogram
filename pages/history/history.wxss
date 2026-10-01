@@ -1,0 +1,32 @@
+.empty-wrap {
+  margin-top: 32rpx;
+  text-align: center;
+  padding: 48rpx 32rpx;
+}
+
+.clear-btn {
+  min-height: 96rpx;
+  padding: 0 24rpx;
+  display: flex;
+  align-items: center;
+  text-decoration: underline;
+  background: none;
+  border: none;
+  margin-left: auto;
+}
+
+.item {
+  min-height: 128rpx;
+  background: var(--card);
+  border-radius: 20rpx;
+  border: 2rpx solid var(--line);
+  padding: 24rpx 28rpx;
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+.item-main { flex: 1; min-width: 0; }
+.item-text { display: block; }
+.item-sum { display: block; margin-top: 4rpx; }
+.item-arrow { color: var(--ink-2); width: auto; }

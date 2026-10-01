@@ -1,0 +1,42 @@
+<view class="page quiz-page" style="{{vars}}">
+
+  <!-- 进度 -->
+  <view class="row-between prog">
+    <text class="cap">第 {{idx + 1}} 题 / 共 {{total}} 题</text>
+    <text class="cap quit" bindtap="quit">先不做 ›</text>
+  </view>
+  <view class="prog-bar">
+    <view class="prog-fill" style="width:{{(idx + 1) * 100 / total}}%"></view>
+  </view>
+
+  <!-- 情景 -->
+  <view class="scenario">
+    <text class="body para">{{q.scenario}}</text>
+  </view>
+
+  <!-- 问题 -->
+  <text class="h2 q-title">{{q.question}}</text>
+
+  <!-- 超大选项 -->
+  <view wx:for="{{q.options}}" wx:key="text"
+        class="opt {{picked === index ? (item.correct ? 'opt-right' : 'opt-wrong') : ''}}"
+        data-i="{{index}}"
+        bindtap="onOption">
+    <text class="opt-mark dot">{{ ['A','B','C','D'][index] }}</text>
+    <text class="opt-text">{{item.text}}</text>
+    <text wx:if="{{showExplain && item.correct}}" class="opt-tick ico ico-m">✅</text>
+  </view>
+
+  <!-- 答错/答对都立刻讲清楚，语气正向 -->
+  <view wx:if="{{showExplain}}" class="explain {{correct ? 'ex-right' : 'ex-wrong'}}">
+    <view class="line ex-head">
+      <text class="ico ico-s">{{correct ? '👏' : '💡'}}</text>
+      <text class="title grow">{{correct ? txt.quizRight : txt.quizWrong}}</text>
+    </view>
+    <text class="body ex-body para">{{q.explain}}</text>
+    <view class="btn btn-primary" style="margin-top:28rpx" hover-class="btn-hover" bindtap="next">
+      {{idx + 1 >= total ? txt.quizDone : txt.quizNext}}
+    </view>
+  </view>
+
+</view>

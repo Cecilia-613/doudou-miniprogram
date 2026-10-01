@@ -1,0 +1,166 @@
+/* 结果页：顶部播报条 → 可滚动的内容 → 底部固定按钮。
+   用 flex 竖着排，中间那块吃掉剩余高度，不再靠「78vh」和「140rpx」这类写死的数。 */
+.result-page {
+  padding-top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: calc(216rpx + env(safe-area-inset-bottom));
+}
+
+/* 播报状态条（不再 fixed：以前 fixed 会盖住非拍照进来的第一屏结论横幅） */
+.speak-bar {
+  flex-shrink: 0;
+  margin: 0 -32rpx;
+  padding: calc(env(safe-area-inset-top) + 16rpx) 32rpx 16rpx;
+  background: rgba(255, 246, 234, .96);
+  border-bottom: 2rpx solid var(--line);
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.speak-bar.on { background: var(--warn-bg); }
+.sb-text { flex: 1; min-width: 0; font-size: var(--fs-cap); line-height: 1.3; color: var(--ink-2); }
+.sb-stop {
+  flex-shrink: 0;
+  min-width: 128rpx;
+  min-height: 80rpx;
+  padding: 8rpx 24rpx;
+  border-radius: 999rpx;
+  background: var(--ink);
+  color: #fff;
+  font-size: var(--fs-cap);
+  line-height: 1.25;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+}
+.sb-stop.ghost {
+  background: transparent;
+  color: var(--brand-2);
+  border: 3rpx solid var(--brand-2);
+}
+
+.photo-note {
+  flex-shrink: 0;
+  margin-top: 20rpx;
+  background: var(--warn-bg);
+  border-radius: 20rpx;
+  padding: 20rpx 28rpx;
+  border: 2rpx dashed var(--warn);
+}
+
+.scroll {
+  flex: 1;
+  height: 0;            /* 配合 flex:1 让 scroll-view 拿到剩余高度 */
+  min-height: 0;
+  margin-top: 24rpx;
+}
+
+.unit {
+  border-radius: 20rpx;
+  margin-bottom: 20rpx;
+  transition: background .2s ease;
+}
+.unit.on {
+  background: var(--warn-bg);
+  box-shadow: inset 0 0 0 4rpx var(--warn);
+}
+
+/* 结论横幅：颜色 + 图标 + 文字 三重编码 */
+.banner {
+  padding: 36rpx 32rpx;
+  border-radius: 20rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.banner.lv-danger { background: var(--danger); color: #fff; }
+.banner.lv-warn { background: var(--warn); color: #fff; }
+.banner.lv-safe { background: var(--safe); color: #fff; }
+.banner.lv-ask { background: var(--ask); color: #fff; }
+.b-text { font-size: var(--fs-h1); font-weight: 700; line-height: 1.3; }
+
+/* 所有卡片内边距统一 28rpx，左边缘才对得齐 */
+.u-type { padding: 8rpx 28rpx 0; }
+.type-label { display: block; color: var(--ink-2); margin-bottom: 8rpx; }
+
+.ask-cta {
+  margin-top: 32rpx;
+  padding: 32rpx;
+  border-radius: 20rpx;
+  background: var(--ask-bg);
+  border: 4rpx solid var(--ask);
+  text-align: center;
+}
+.ask-cta .h2 { color: var(--ask); }
+
+.echo {
+  background: var(--card);
+  border-radius: 20rpx;
+  padding: 28rpx;
+  border: 2rpx solid var(--line);
+}
+.echo-label { display: block; margin-bottom: 8rpx; }
+.echo-text {
+  font-size: var(--fs-title);
+  font-weight: 600;
+  line-height: 1.6;
+  color: var(--ink);
+}
+
+/* 「为什么」：小圆点对着第一行文字的正中间，字号再大也对得上 */
+.reason-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 20rpx;
+  padding: 20rpx 28rpx;
+}
+.reason-text { line-height: 1.6; }
+.r-dot {
+  width: 20rpx;
+  height: 20rpx;
+  border-radius: 999rpx;
+  background: var(--brand);
+  margin-top: calc((var(--fs-body) * 1.6 - 20rpx) / 2);
+  flex-shrink: 0;
+}
+
+.story {
+  background: var(--card);
+  border-left: 10rpx solid var(--warn);
+  border-radius: 0 20rpx 20rpx 0;
+  padding: 28rpx;
+}
+.story-label { display: block; color: var(--warn); font-weight: 600; margin-bottom: 8rpx; }
+
+.sec-title { margin-top: 32rpx; padding: 0 28rpx; }
+
+/* 「现在做三件事」：编号圆圈和第一行文字同高、顶对齐；多行文字也不会让圆圈漂到中间 */
+.act-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 24rpx;
+  min-height: 128rpx;
+  background: var(--card);
+  border-radius: 20rpx;
+  padding: 24rpx 28rpx;
+  margin-bottom: 16rpx;
+  border: 2rpx solid var(--line);
+}
+.act-item.done { background: var(--safe-bg); border-color: var(--safe); }
+.step-done { background: var(--safe); }
+.act-text { flex: 1; min-width: 0; font-size: var(--fs-title); font-weight: 600; line-height: 1.5; }
+.act-done { color: var(--safe); }
+.act-tick { height: calc(var(--fs-title) * 1.5); }
+
+.tail-space { height: 40rpx; }
+
+/* 底部按钮通用样式在 app.wxss (.bar-btn)；这里只保留结果页特有的两行小字按钮 */
+.col-btn {
+  font-size: var(--fs-cap);
+  line-height: 1.3;
+  gap: 0;
+}

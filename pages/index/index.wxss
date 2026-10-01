@@ -1,0 +1,228 @@
+.page {
+  padding-top: 0;
+}
+
+/* 顶部：第一行问候（右侧按胶囊宽度留白），第二行两个小按钮靠左。
+   padding-right 由页面 data.capsuleSafe 动态给出，见 app.js measureCapsule() */
+.top {
+  padding-top: calc(env(safe-area-inset-top) + 32rpx);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.chip-row {
+  margin-top: 20rpx;
+  display: flex;
+  align-items: center;
+  gap: 16rpx;
+}
+.chip {
+  min-height: 128rpx;
+  min-width: 128rpx;
+  padding: 0 28rpx;
+  border-radius: 999rpx;
+  background: var(--card);
+  border: 2rpx solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.chip text { line-height: 1.25; }
+.chip-hover { background: var(--warn-bg); }
+
+/* 主语音按钮区 */
+.mic-area {
+  margin-top: 72rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.mic-sub {
+  margin-top: 56rpx;
+  color: var(--ink-2);
+  min-height: 96rpx;
+  padding: 20rpx 28rpx;
+  text-decoration: underline;
+  text-align: center;
+}
+
+/* 两张大卡：图标 / 标题 / 副标题 各占一个固定高度的「格子」，
+   格子高度都用字号变量算出来，所以两张卡的图标、标题、副标题永远在同一水平线上，
+   不管字号档（标准/大/超大）和方言（沪语字更多）怎么变。 */
+.grid2 {
+  margin-top: 40rpx;
+  display: flex;
+  align-items: stretch;
+  gap: 24rpx;
+}
+.big-card {
+  flex: 1;
+  min-width: 0;
+  background: var(--card);
+  border-radius: 20rpx;
+  border: 2rpx solid var(--line);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 28rpx 12rpx 24rpx;
+}
+.big-card .ico { height: 1.1em; }
+.c-title {
+  font-size: var(--fs-h2);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 12rpx;
+  min-height: calc(var(--fs-h2) * 1.25);          /* 标准档：一行 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+/* 字号变大或者讲沪语（字更多）：标题预留两行，副标题还是对得齐 */
+.s-large .c-title, .s-xl .c-title, .l-sh .c-title {
+  min-height: calc(var(--fs-h2) * 1.25 * 2);
+}
+.c-sub {
+  font-size: var(--fs-cap);
+  color: var(--ink-2);
+  line-height: 1.35;
+  margin-top: 8rpx;
+  text-align: center;
+  min-height: calc(var(--fs-cap) * 1.35 * 2);      /* 副标题固定两行 */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.empty-wrap {
+  text-align: center;
+  padding: 40rpx 32rpx;
+}
+
+.see-all {
+  min-height: 96rpx;
+  padding: 0 24rpx;
+  text-decoration: underline;
+  display: flex;
+  align-items: center;
+}
+
+.hist-item {
+  min-height: 128rpx;
+  background: var(--card);
+  border-radius: 20rpx;
+  border: 2rpx solid var(--line);
+  padding: 12rpx 28rpx;
+  margin-top: 16rpx;
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+}
+.hist-text {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--fs-body);
+  font-weight: 500;
+  line-height: 1.4;
+}
+.hist-time { color: var(--ink-2); line-height: 1.4; }
+
+/* 底部两个按钮：样式见 app.wxss 的 .bar-btn（图标在上、字在下），此处不再重复 */
+
+/* 设置面板里的两个端入口：并排、一样大，标题/说明各占固定行数 */
+.end-card {
+  flex: 1;
+  min-width: 0;
+  min-height: 176rpx;
+  background: var(--card);
+  border: 4rpx solid var(--brand);
+  border-radius: 20rpx;
+  padding: 20rpx 12rpx;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+}
+.e-title {
+  font-size: var(--fs-title);
+  font-weight: 700;
+  line-height: 1.25;
+  margin-top: 8rpx;
+  min-height: calc(var(--fs-title) * 1.25);
+  text-align: center;
+}
+.s-large .e-title, .s-xl .e-title, .l-sh .e-title {
+  min-height: calc(var(--fs-title) * 1.25 * 2);
+}
+.e-cap {
+  font-size: var(--fs-cap);
+  color: var(--ink-2);
+  line-height: 1.35;
+  margin-top: 4rpx;
+  min-height: calc(var(--fs-cap) * 1.35 * 2);
+  text-align: center;
+}
+.hist-link { min-height: 128rpx; margin-top: 8rpx; }
+
+/* 浮层里的选项行 */
+.pick-list {
+  margin-top: 24rpx;
+  max-height: 52vh;
+}
+.pick-item {
+  display: flex;
+  align-items: center;
+  gap: 20rpx;
+  min-height: 128rpx;
+  background: var(--card);
+  border-radius: 20rpx;
+  padding: 12rpx 28rpx;
+  margin-bottom: 16rpx;
+  border: 2rpx solid var(--line);
+}
+.pick-text { flex: 1; min-width: 0; font-size: var(--fs-body); font-weight: 500; line-height: 1.4; }
+.pick-arrow { color: var(--ink-2); width: auto; }
+
+.font-opt {
+  flex: 1;
+  min-height: 128rpx;
+  border-radius: 20rpx;
+  border: 4rpx solid var(--line);
+  background: var(--card);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  line-height: 1.25;
+  font-size: var(--fs-body);
+  font-weight: 600;
+}
+.font-opt.on {
+  border-color: var(--brand);
+  background: var(--warn-bg);
+  color: var(--brand-2);
+}
+
+.switch-row {
+  min-height: 128rpx;
+  padding: 16rpx 0;
+  gap: 24rpx;
+  border-bottom: 2rpx solid var(--line);
+}
+.switch {
+  flex-shrink: 0;
+  min-width: 128rpx;
+  min-height: 80rpx;
+  border-radius: 999rpx;
+  background: #E6E0D4;
+  color: var(--ink-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  font-size: var(--fs-cap);
+  font-weight: 600;
+}
+.switch.on { background: var(--safe); color: #fff; }

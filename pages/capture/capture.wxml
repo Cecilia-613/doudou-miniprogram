@@ -1,0 +1,69 @@
+<view class="page capture-page" style="{{vars}}">
+
+  <!-- 相机取景（还没有图的时候显示实景） -->
+  <camera wx:if="{{!photo}}" mode="normal" resolution="high" frame-size="medium" class="cam"></camera>
+
+  <!-- 已拍 / 已选的图，可疑词框在上面 -->
+  <view wx:if="{{photo}}" class="preview-wrap">
+    <image class="preview" src="{{photo}}" mode="aspectFill"></image>
+    <view wx:for="{{words}}" wx:key="word"
+          class="box-label"
+          style="left:{{item.box[0]}}%;top:{{item.box[1]}}%;width:{{item.box[2]}}%;height:{{item.box[3]}}%">
+      <text class="box-word">{{item.word}}</text>
+    </view>
+    <view wx:if="{{scanning}}" class="scan-line"></view>
+  </view>
+
+  <view wx:if="{{!photo}}" class="cam-hint">
+    <text class="cap">{{txt.photoTip}}</text>
+  </view>
+
+  <!-- 智能体在看图：给一句人话，不要转圈不说为什么 -->
+  <view wx:if="{{scanning}}" class="scan-tip">
+    <view class="spin"></view>
+    <text class="title">{{txt.scanning}}</text>
+    <text class="cap">{{agentOn ? txt.agentTip : txt.ruleTip}}</text>
+  </view>
+
+  <!-- 结论先行：一眼看到是「骗子 / 小心 / 没问题 / 要再问问」 -->
+  <view wx:if="{{!scanning && result}}" class="found {{'bd-' + result.level}}">
+
+    <view class="cap-banner lv-banner-{{result.level}}">
+      <text class="ico ico-l">{{result.icon}}</text>
+      <text class="cb-text grow">{{lang === 'sh' ? result.headlineSh : result.headline}}</text>
+    </view>
+
+    <text class="h2 why-line">{{result.typeText}}</text>
+
+    <view wx:if="{{words.length}}" class="word-row">
+      <text wx:for="{{words}}" wx:key="word" class="pill bg-{{result.level}} lv-{{result.level}}">{{item.word}}</text>
+    </view>
+    <text wx:else class="cap para">{{result.level === 'danger' ? txt.noWordDanger : (result.level === 'safe' ? txt.noWordSafe : txt.noWordOther)}}</text>
+
+    <!-- 只用一句话说清楚接下来干嘛 -->
+    <view class="btn btn-primary flex1 see-btn" bindtap="seeResult">
+      {{result.level === 'ask' ? txt.askHelpBtn : txt.hearWhy}} ›
+    </view>
+    <view class="btn btn-outline retake-btn" bindtap="retake">{{txt.retake}}</view>
+  </view>
+
+  <!-- 底部操作（还没出结论时才占屏） -->
+  <view wx:if="{{!result}}" class="bottom-bar capture-bar">
+    <view class="shutter" bindtap="takePhoto">
+      <text class="shutter-ring"></text>
+    </view>
+    <view class="btn btn-outline bar-btn-small" bindtap="chooseAlbum">{{txt.fromAlbum}}</view>
+  </view>
+
+  <!-- 演示样例：没有真机相机也能走完这条链路 -->
+  <view wx:if="{{!photo}}" class="samples">
+    <text class="cap sample-label">没有真机？点这里的样例图片：</text>
+    <view class="row" style="gap:16rpx;flex-wrap:wrap">
+      <view wx:for="{{samples}}" wx:key="label"
+            class="sample-chip" data-i="{{index}}" bindtap="onSample">
+        {{item.label}}
+      </view>
+    </view>
+  </view>
+
+</view>

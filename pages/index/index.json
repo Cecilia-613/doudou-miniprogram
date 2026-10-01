@@ -1,0 +1,6 @@
+{
+  "navigationStyle": "custom",
+  "usingComponents": {
+    "mic-button": "/components/mic-button/index"
+  }
+}

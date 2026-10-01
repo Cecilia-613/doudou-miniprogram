@@ -1,0 +1,62 @@
+<view class="page cm-page s-{{scale}} l-{{lang}}" style="{{vars}}">
+
+  <view class="cm-head">
+    <text class="h2">🧑‍💼 社区工作台</text>
+    <text class="cap">这一页是给居委和志愿者看的，不是给老人看的</text>
+  </view>
+
+  <!-- 三个页签：待办工单 / 本周高发 / 劝阻话术 -->
+  <view class="cm-tabs">
+    <view class="cm-tab {{tab==='todo'?'on':''}}" data-tab="todo" bindtap="switchTab">待办工单</view>
+    <view class="cm-tab {{tab==='top'?'on':''}}" data-tab="top" bindtap="switchTab">本周高发</view>
+    <view class="cm-tab {{tab==='talk'?'on':''}}" data-tab="talk" bindtap="switchTab">劝阻话术</view>
+  </view>
+
+  <!-- 待办工单 -->
+  <block wx:if="{{tab==='todo'}}">
+    <view wx:for="{{tickets}}" wx:key="id" class="tk" data-i="{{index}}" bindtap="takeOrder" hover-class="card-hover">
+      <view class="tk-top">
+        <text class="tk-id">{{item.id}}</text>
+        <text class="tk-tag {{item.cls}}">{{item.icon}} {{item.tag}}</text>
+      </view>
+      <view class="tk-mid">
+        <text class="tk-type">{{item.type}}</text>
+        <text class="tk-state {{item.state==='待接单'?'todo':''}}">{{item.state}}</text>
+      </view>
+      <view class="tk-bot">
+        <text class="cap">{{item.who}}</text>
+        <text class="cap">{{item.time}}</text>
+      </view>
+    </view>
+    <view class="cap cm-foot">点一张工单就是「接单」，会同时通知物业陪同上门。</view>
+  </block>
+
+  <!-- 本周高发 Top3 -->
+  <block wx:elif="{{tab==='top'}}">
+    <view wx:for="{{top3}}" wx:key="name" class="top-item">
+      <view class="top-rank dot">{{index+1}}</view>
+      <view class="col grow">
+        <text class="title">{{item.name}}</text>
+        <text class="cap">{{item.tip}}</text>
+      </view>
+      <text class="top-count">{{item.count}}</text>
+    </view>
+    <view class="cap cm-foot">数字是本周本社区上报的次数，用来排宣教优先级。</view>
+  </block>
+
+  <!-- 劝阻话术包 -->
+  <block wx:else>
+    <view wx:for="{{talkPack}}" wx:key="*this" class="talk-item" data-i="{{index}}" bindtap="copyTip" hover-class="card-hover">
+      <text class="talk-no dot">{{index+1}}</text>
+      <text class="talk-text para">{{item}}</text>
+      <text class="talk-copy">{{copiedIdx===index ? '已复制' : '复制'}}</text>
+    </view>
+    <view class="btn btn-primary cm-all" bindtap="copyAll">整套复制</view>
+    <view class="cap cm-foot">点一条就能复制，上门前发给家属或者直接念给老人听。</view>
+  </block>
+
+  <view class="bottom-bar">
+    <view class="btn btn-outline bar-btn" bindtap="back">‹ 回首页</view>
+  </view>
+
+</view>

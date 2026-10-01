@@ -1,0 +1,28 @@
+<view class="page report-page" style="{{vars}}">
+
+  <view class="score-card">
+    <text class="cap">{{txt.scoreTitle}}</text>
+    <text class="score">{{score}}</text>
+    <text class="cap-ink">考了 {{rightCount}} / 5 道全对</text>
+  </view>
+
+  <text class="body summary">{{summary}}</text>
+
+  <view class="card" style="margin-top:32rpx">
+    <text class="h2">您现在哪几样最牢、哪几样还差点</text>
+    <view class="radar-wrap">
+      <radar values="{{radar}}" labels="{{labels}}" size="{{size}}"></radar>
+    </view>
+    <view wx:if="{{weak.length}}" class="weak">
+      <text class="cap-ink">还要留心：{{weak[0]}}<block wx:if="{{weak[1]}}">、{{weak[1]}}</block></text>
+    </view>
+  </view>
+
+  <view class="btn-row">
+    <button class="btn btn-primary flex1" open-type="share" hover-class="btn-hover">{{txt.shareToKid}}</button>
+    <view class="btn btn-outline flex1" bindtap="redo" hover-class="btn-hover">再做一遍</view>
+  </view>
+
+  <view class="btn btn-outline" style="margin-top:20rpx" bindtap="backHome">{{txt.backHome}}</view>
+
+</view>

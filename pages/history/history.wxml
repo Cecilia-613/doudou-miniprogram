@@ -1,0 +1,28 @@
+<view class="page" style="{{vars}}">
+
+  <view class="row-between">
+    <text class="h2">{{txt.recentAsk}}</text>
+    <text wx:if="{{list.length}}" class="cap clear-btn" bindtap="empty">{{emptying ? '真的要清空？点这里' : txt.historyClear}}</text>
+  </view>
+
+  <view wx:if="{{!list.length}}" class="card empty-wrap">
+    <text class="cap">还没有问过什么。</text>
+    <text class="cap" style="margin-top:8rpx">回家按住那个圆按钮，慢慢讲就好。</text>
+  </view>
+
+  <view wx:for="{{list}}" wx:key="id"
+        class="item"
+        data-i="{{index}}"
+        hover-class="card-hover"
+        bindtap="onTap">
+    <text class="ico ico-s">{{item.icon}}</text>
+    <view class="col item-main grow">
+      <text class="body item-text">{{item.text}}</text>
+      <text class="cap item-sum">{{item.tag}}・{{item.summary}}・{{item.at}}</text>
+    </view>
+    <text class="item-arrow ico ico-m">›</text>
+  </view>
+
+  <view wx:if="{{emptying}}" class="btn btn-primary" style="margin-top:32rpx" bindtap="cancelEmpty">{{txt.cancel}}</view>
+
+</view>

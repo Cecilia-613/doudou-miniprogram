@@ -1,0 +1,131 @@
+<view class="page result-page s-{{scale}} l-{{lang}}" style="{{vars}}" bindtouchstart="touchAnywhere">
+
+  <!-- 播报状态条 -->
+  <view class="speak-bar {{speaking ? 'on' : ''}}">
+    <text class="ico ico-s">{{speaking ? '🔊' : '🔈'}}</text>
+    <text class="sb-text">{{speaking ? txt.speaking + '…' : txt.openLoud}}</text>
+    <view wx:if="{{speaking}}" class="sb-stop" bindtap="stopSpeak">{{txt.stopSpeak}}</view>
+    <view wx:else class="sb-stop ghost" bindtap="replay">{{txt.tapToReplay}}</view>
+  </view>
+
+  <!-- 拍照来源：可疑词数量 -->
+  <view wx:if="{{from === 'photo' && words.length}}" class="photo-note">
+    <view class="line"><text class="ico ico-s">📷</text><text class="cap-ink grow">{{photoNote}}</text></view>
+  </view>
+
+  <scroll-view scroll-y class="scroll"
+               scroll-into-view="u{{activeIdx}}"
+               scroll-with-animation="{{true}}">
+
+    <view wx:for="{{units}}" wx:key="id"
+          id="u{{index}}"
+          class="unit u-{{item.kind}} {{index === activeIdx ? 'on' : ''}}">
+
+      <!-- 结论横幅 -->
+      <block wx:if="{{item.kind === 'headline'}}">
+        <view class="banner lv-{{r.level}}">
+          <text class="ico ico-l">{{r.icon}}</text>
+          <text class="b-text grow">{{item.text}}</text>
+        </view>
+      </block>
+
+      <!-- 骗局类型 -->
+      <block wx:elif="{{item.kind === 'type'}}">
+        <view class="u-type">
+          <text class="cap-ink type-label">{{txt.why}}</text>
+          <text class="title">{{item.text}}</text>
+        </view>
+      </block>
+
+      <!-- 回显老人原话，建立信任 -->
+      <block wx:elif="{{item.kind === 'echo'}}">
+        <view class="echo">
+          <text class="cap echo-label">{{txt.youAsked}}</text>
+          <text class="echo-text para">“{{item.text}}”</text>
+        </view>
+      </block>
+
+      <!-- 为什么 -->
+      <block wx:elif="{{item.kind === 'reason'}}">
+        <view class="reason-item">
+          <text class="r-dot"></text>
+          <text class="body reason-text grow">{{item.text}}</text>
+        </view>
+      </block>
+
+      <!-- 本地弄堂案例类比 -->
+      <block wx:elif="{{item.kind === 'story'}}">
+        <view class="story">
+          <text class="cap story-label">隔壁弄堂发生过</text>
+          <text class="body para">{{item.text}}</text>
+        </view>
+      </block>
+
+      <!-- 现在做三件事 -->
+      <block wx:elif="{{item.kind === 'actitle'}}">
+        <view class="sec-title">
+          <text class="h2">{{item.text}}</text>
+        </view>
+      </block>
+
+      <!-- 拿不准：明确交给人来确认 -->
+      <block wx:elif="{{item.kind === 'askcta'}}">
+        <view class="ask-cta">
+          <text class="h2">{{item.text}}</text>
+        </view>
+      </block>
+
+      <block wx:else>
+        <view class="act-item {{item.done ? 'done' : ''}}">
+          <text class="step-dot {{item.done ? 'step-done' : ''}}">{{item.no}}</text>
+          <text class="act-text {{item.done ? 'act-done' : ''}}">{{item.text}}</text>
+          <text wx:if="{{item.done}}" class="act-tick ico ico-m">✅</text>
+        </view>
+      </block>
+
+    </view>
+
+    <view class="tail-space"></view>
+  </scroll-view>
+
+  <!-- 底部 88px 双按钮 -->
+  <!-- 拿不准（ask）时：主按钮直接是「喊人来确认」，不要求老人先点了「我懂了」才敢求助 -->
+  <view wx:if="{{r.level === 'ask'}}" class="bottom-bar">
+    <view class="btn btn-primary bar-btn btn-lg" bindtap="openHelp" hover-class="btn-hover">{{txt.askHelpBtn}}</view>
+    <view class="btn bar-btn bar-btn-2 col-btn btn-lg" bindtap="askAgain" hover-class="btn-hover">
+      <text>{{txt.askLater}}</text>
+    </view>
+  </view>
+
+  <view wx:else class="bottom-bar">
+    <view class="btn btn-primary bar-btn" bindtap="iKnow" hover-class="btn-hover">{{txt.iKnow}}</view>
+    <view class="btn bar-btn bar-btn-2 col-btn" bindtap="openHelp" hover-class="btn-hover">
+      <text>{{txt.stillWorried}}</text>
+      <text>{{txt.askHelp}}</text>
+    </view>
+  </view>
+
+  <!-- 三方闭环 -->
+  <view wx:if="{{panel === 'help'}}" class="mask" bindtap="closePanel">
+    <view class="sheet" catchtap="noop">
+      <view class="line"><text class="ico ico-l">🆘</text><text class="h2 grow">我马上叫人来</text></view>
+      <view class="help-item" bindtap="callHelper" data-phone="{{profile.kid.phone}}">
+        <text class="ico ico-l">👩</text>
+        <view class="col help-main">
+          <text class="title">{{profile.kid.name}}</text>
+          <text class="cap">{{profile.kid.phone}}（女儿）</text>
+        </view>
+        <text class="ico ico-m">📞</text>
+      </view>
+      <view class="help-item" bindtap="callHelper" data-phone="{{profile.helper.phone}}">
+        <text class="ico ico-l">🧑‍💼</text>
+        <view class="col help-main">
+          <text class="title">{{profile.helper.name}}</text>
+          <text class="cap">{{profile.helper.phone}}（社区）</text>
+        </view>
+        <text class="ico ico-m">📞</text>
+      </view>
+    </view>
+  </view>
+
+</view>

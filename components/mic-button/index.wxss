@@ -1,0 +1,85 @@
+.mic-wrap {
+  position: relative;
+  width: 352rpx;
+  height: 352rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mic {
+  position: relative;
+  width: 352rpx;
+  height: 352rpx;
+  border-radius: 999rpx;
+  background: var(--brand);
+  box-shadow: 0 12rpx 32rpx rgba(232, 98, 42, .32);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: transform .18s ease, background .18s ease;
+  z-index: 2;
+}
+.mic.pressed {
+  transform: scale(1.08);
+  background: var(--brand-2);
+}
+
+.mic-icon { font-size: 96rpx; line-height: 1; height: 96rpx; display: flex; align-items: center; justify-content: center; }
+.mic-label { font-size: var(--fs-h2); font-weight: 700; line-height: 1.25; margin-top: 12rpx; text-align: center; max-width: 300rpx; }
+.mic-tip { font-size: var(--fs-cap); line-height: 1.25; opacity: .9; margin-top: 8rpx; text-align: center; max-width: 300rpx; }
+
+/* 三层扩散波纹 */
+.ripple {
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 352rpx; height: 352rpx;
+  margin: -176rpx 0 0 -176rpx;
+  border-radius: 999rpx;
+  background: rgba(232, 98, 42, .18);
+  z-index: 1;
+  animation: spread 1.8s ease-out infinite;
+}
+.r1 { animation-delay: 0s; }
+.r2 { animation-delay: .6s; }
+.r3 { animation-delay: 1.2s; }
+
+@keyframes spread {
+  0%   { transform: scale(1);    opacity: .55; }
+  100% { transform: scale(1.75); opacity: 0; }
+}
+
+/* 实时音量条 */
+.vol {
+  position: absolute;
+  bottom: -56rpx;
+  left: 0; right: 0;
+  height: 40rpx;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 8rpx;
+  z-index: 3;
+}
+.vol-bar {
+  width: 12rpx;
+  height: 16rpx;
+  border-radius: 999rpx;
+  background: var(--line);
+  transition: height .12s linear, background .12s linear;
+}
+.vol-bar.on {
+  height: 40rpx;
+  background: var(--brand);
+}
+
+.mic-sec {
+  position: absolute;
+  top: -48rpx;
+  left: 0; right: 0;
+  text-align: center;
+  font-size: var(--fs-cap);
+  color: var(--ink-2);
+}

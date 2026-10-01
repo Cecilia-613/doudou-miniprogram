@@ -1,0 +1,31 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/result/result",
+    "pages/capture/capture",
+    "pages/quiz/quiz",
+    "pages/report/report",
+    "pages/history/history",
+    "pages/family/family",
+    "pages/community/community"
+  ],
+  "window": {
+    "backgroundTextStyle": "dark",
+    "navigationBarBackgroundColor": "#FFF6EA",
+    "navigationBarTitleText": "兜兜",
+    "navigationBarTextStyle": "black",
+    "backgroundColor": "#FFF6EA"
+  },
+  "permission": {
+    "scope.record": {
+      "desc": "用于语音向兜兜提问"
+    },
+    "scope.camera": {
+      "desc": "用于拍照识别短信和广告"
+    }
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json",
+  "darkmode": false,
+  "lazyCodeLoading": "requiredComponents"
+}
